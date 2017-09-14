@@ -1,0 +1,7 @@
+{
+  "name": "Cool guy bot",
+  "description": "Basic Groupme Bot written in Node",
+  "repository": "https://github.com/petemcgrath/cool-guy-bot",
+  "logo": "https://nau.edu/uploadedImages/Administrative/EMSA_Sites/Student_Orgs/Greek_Life/Media/Lettersforsite%20Theta%20Chi.jpg",
+  "keywords": [GroupMe, Bot, Node, heroku, gifbot]
+}
