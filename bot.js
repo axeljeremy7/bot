@@ -22,7 +22,7 @@ function respond() {
 
 if (request.sender_id!=536647) { // avoid to read the response of the bot itself
 
-  var str = message.match(/#[a-z0-9`/`-]+/gi)
+  var str = message.match(/#[a-z0-9`/`-]+/gi) // to read the giphy with - or / such 9/11 or cool-bot
   if (str != null) {
     if(str.length > 0){
         if (str[0] == "#coolbot") {
