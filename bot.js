@@ -18,16 +18,20 @@ function respond() {
 
   message = message.toLowerCase();
 
+//git push -u origin master
 
 if (request.sender_id!=536647) { // avoid to read the response of the bot itself
 
   var str = message.match(/#[a-z0-9`/`-]+/gi)
-  if(str.length > 0){
-      if (str[0] == "#coolbot") {
-        str[0] = "#cool-bot"
-      }
-    gifTag(str[0])
+  if (str != null) {
+    if(str.length > 0){
+        if (str[0] == "#coolbot") {
+          str[0] = "#cool-bot"
+        }
+      gifTag(str[0])
+    }
   }
+
 
 
 /* This is without regex pattern
