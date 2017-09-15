@@ -89,8 +89,17 @@ if (request.sender_id!=536647) { // avoid to read the response of the bot itself
   postMessage("Hello  " + request.name + " " + cool() );
 
   //
-  this.res.end();
+
   }
+  /*
+  The logs in heroku can be useful to make customs
+   responses to each of member inside the group
+  if (request.sender_id == "number of sender_id") { 
+    custom code for your friends
+    postMessage("https://media.giphy.com/media/9zXWAIcr6jycE/giphy.gif");
+  }
+  */
+  this.res.end();
 
 
 }
