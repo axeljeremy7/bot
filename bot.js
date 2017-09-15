@@ -16,10 +16,21 @@ function respond() {
   console.log(request.user_id)
   console.log(request.id)
 
-/* COMMENT
+  message = message.toLowerCase();
 
 
+if (request.sender_id!=536647) { // avoid to read the response of the bot itself
 
+  var str = message.match(/#[a-z0-9`/`-]+/gi)
+  if(str.length > 0){
+      if (str[0] == "#coolbot") {
+        str[0] = "#cool-bot"
+      }
+    gifTag(str[0])
+  }
+
+
+/* This is without regex pattern
   if (message.substring(0,1) == '#' ) {
 
     if (message == "#coolbot") {
@@ -27,7 +38,8 @@ function respond() {
     }
     gifTag(message);
 
-  }else {
+  }
+  else {
 
     if (message.search("#") >= 0) {
       var m1 = message.slice(message.search("#"))
@@ -45,89 +57,43 @@ function respond() {
     }
 
   }
+  */
 
-  if (message.toLowerCase() == 'help') {
-    postMessage("fuck you!");
+
+
+  if (message.search("help") >= 0 &&  message.search("bot") >= 0) {
+
+    postMessage("I make giphy using # ");
   }
 
-  if (message.toLowerCase().search("help") >= 0 || message.toLowerCase().search("bot") >= 0) {
 
-    postMessage("I'm " + cool());
-    postMessage("https://media.giphy.com/media/xUA7bjnIXwqcwBTflm/giphy.gif");
-    //https://media.giphy.com/media/c6DcchsqBlGCY/giphy.gif
+  if (message.search("kill") >= 0 || message.search("delete") >= 0 || message.search("eliminate") >= 0) {
 
+    postMessage("https://media.giphy.com/media/Xqxy4ElIR8nwk/giphy.gif");
   }
 
-  if (message.toLowerCase().search("kill") >= 0 || message.toLowerCase().search("delete") >= 0 || message.toLowerCase().search("eliminate") >= 0) {
+  if (message.search("asap") >= 0 ) {
 
-    gifTag("#fuckyou");
+      gifTag("#asap")
   }
 
-  if (message.toLowerCase().search("asap") >= 0 ) {
-
-    postMessage("ASAP " + cool());
-  }
-
-  if (message.toLowerCase().search("terminator") >= 0 || message.toLowerCase().search("skynet") >= 0 ) {
+  if (message.search("terminator") >= 0 || message.search("skynet") >= 0 ) {
 
       postMessage("https://media.giphy.com/media/c6DcchsqBlGCY/giphy.gif");
   }
 
-*/
+  postMessage("Hello  " + request.name + " " + cool() );
 
-/*
-if (request.name != "coolBot") {
-  postMessage(request.name + " "+ cool());
-  //gifTag("#fuckyou");
-}
-*/
-
-if (message.toLowerCase().search("asap") >= 0 ) {
-  gifTag("#hurry");
-  postMessage("ASAP " + cool());
-}
-
-if (message.toLowerCase() == 'help') {
-  //postMessage(request.name + "fuck you!");
-}
-
-if (message.toLowerCase().search("bot") >= 0 ) {
-
-  //gifTag("#cool");
-  //postMessage("https://media.giphy.com/media/c6DcchsqBlGCY/giphy.gif");
-
-}
-
-if (message.toLowerCase().search("kill") >= 0 || message.toLowerCase().search("delete") >= 0 || message.toLowerCase().search("eliminate") >= 0) {
-
-  //gifTag("#fuckyou");
-}
-
-if (message.toLowerCase().search("bot") >= 0 && message.toLowerCase().search("cool")) {
-
-  //postMessage("https://media.giphy.com/media/mIZ9rPeMKefm0/giphy.gif");
-  //gifTag("#cool");
-}
-
-if (message.toLowerCase().search("terminator") >= 0 || message.toLowerCase().search("skynet") >= 0 ) {
-
-    //postMessage("https://media.giphy.com/media/c6DcchsqBlGCY/giphy.gif");
-}
-
-
-
-
-
-
-
+  //
   this.res.end();
+  }
 
 
 }
 
 
-function gifTag(message) {
-  request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
+function gifTag(message) {//&rating=r
+  request('https://api.giphy.com/v1/gifs/translate?s=' + message.substring(1).trim() + '&api_key=9b5e06fee96e48f881cdf0dc8f5cae5d', function (error, response, body) {
   parsedData = JSON.parse(body);
 
   if (!error && response.statusCode == 200 && parsedData && parsedData.data.images) {
@@ -145,8 +111,6 @@ function gifTag(message) {
 function postMessage(botRes) {
   var botResponse, options, body, botReq;
 
-  //botResponse = cool();
-
   options = {
     hostname: 'api.groupme.com',
     path: '/v3/bots/post',
@@ -160,7 +124,6 @@ function postMessage(botRes) {
   };
 
   console.log('sending ' + botResponse + ' to ' + botID);
-
 
 
   botReq = HTTPS.request(options, function(res) {
